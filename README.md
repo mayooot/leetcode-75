@@ -1,2 +1,2 @@
 # leetcode-75
-just learning
+https://leetcode.cn/studyplan/leetcode-75/
