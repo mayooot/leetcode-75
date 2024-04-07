@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 345. 反转字符串中的元音字母
@@ -92,6 +94,33 @@ func reverseVowels2(s string) string {
 	return string(ss)
 }
 
+// 栈
+var sets3 = map[byte]struct{}{'a': {}, 'e': {}, 'i': {}, 'o': {}, 'u': {}, 'A': {}, 'E': {}, 'I': {}, 'O': {}, 'U': {}}
+
+func reverseVowels3(s string) string {
+	if len(s) == 1 {
+		return s
+	}
+
+	var stack []byte
+	for i := 0; i < len(s); i++ {
+		if _, ok := sets3[s[i]]; ok {
+			stack = append(stack, s[i])
+		}
+	}
+
+	ss := []byte(s)
+	for i := 0; i < len(s); i++ {
+		if _, ok := sets3[s[i]]; ok {
+			tmp := stack[len(stack)-1]
+			stack = stack[0 : len(stack)-1]
+			ss[i] = tmp
+		}
+	}
+
+	return string(ss)
+}
+
 func main() {
 	fmt.Println(reverseVowels("hello"))
 	fmt.Println(reverseVowels("leetcode"))
@@ -101,4 +130,9 @@ func main() {
 	fmt.Println(reverseVowels2("hello"))
 	fmt.Println(reverseVowels2("leetcode"))
 	fmt.Println(reverseVowels2("aA"))
+	fmt.Println("-------------------------")
+
+	fmt.Println(reverseVowels3("hello"))
+	fmt.Println(reverseVowels3("leetcode"))
+	fmt.Println(reverseVowels3("aA"))
 }
